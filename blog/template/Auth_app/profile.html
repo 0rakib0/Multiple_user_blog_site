@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block body_block %}
+  
+<div class="row">
+    {% if user.profile_pic %}
+    <div class="col-sm-4">
+        <img src="/media/{{user.profile_pic}}" width="100%" alt="">
+    </div>
+    {% else %}
+    <div class="col-sm-4">
+        <img src="/media/profile_pic/demo.jpg" width="100%" alt="">
+    </div>
+    {% endif %}
+    <div class="col-sm-6">
+      {% include "masseges.html" %}
+        <p>First Name: {{user.first_name}}</p>
+        <p>Last Name: {{user.last_name}}</p>
+        <p>Email : {{user.email}}</p>
+        <p>Username: {{user.username}}</p>
+        <p>First Name: {{user.gender}}</p>
+        <p>Join Date: {{user.date_joined}}</p>
+        <button class="btn btn-primary btn-success"> <a href="{% url 'Auth_app:edit_profile' id=user.id %}" style="text-decoration: None;color:#fff;">Update Profile</a></button>
+    </div>
+</div>
+
+
+<hr>
+<h1 class="ml-3 text-center">Your Blogs</h1>
+<div class="row mb-4">
+{% for blog in user.User_blog.all %}
+
+
+<h2>{{blog.Blog_title}}</h2>
+<i>{{blog.publish_date}}</i>
+<p>{{blog.Blog_comment.count}} Comment</p>
+<div class="row d-flex">
+  <div class="col-sm-2">
+    <img src="/media/{{blog.Blog_image}}" width="100%" alt="Blog Image">
+    <button class="btn btn-secondary btn-sm my-4"> <a href="{% url 'Blog_app:edit_blog' id=blog.id %}" style="text-decoration: none;color:#fff;">Edit Blog</a> </button>
+  </div>
+  <div class="col-sm-4">
+    <p>
+      {{blog.Blog_content|truncatechars:280|linebreaks}}
+      <a href="{% url 'Blog_app:blog_details' slug=blog.Slug %}" style="text-decoration:none ;" >Read more...</a>
+    </p>
+  </div>
+</div>
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- <div class="col-md-3">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="/media/{{blog.Blog_image}}" alt="{{blog.Blog_title}}">
+            <div class="card-body">
+                <h5 class="card-title">{{blog.Blog_title|truncatechars:20}}</h5>
+                <p class="card-text">{{blog.Blog_content|truncatechars:50|linebreaks}}</p>
+                <a href="{% url 'Blog_app:blog_details' slug=blog.Slug %}" class="btn btn-primary">Read More</a>
+            </div>
+        </div>
+    </div> -->
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block body_block %}
+  
+
+  <div class="container">
+    {% for blog in blog_data %}
+      
+    <h2>{{blog.Blog_title}}</h2>
+    <i>{{blog.publish_date}}</i>
+    <div class="row d-flex">
+      <div class="col-sm-2">
+        <img src="/media/{{blog.Blog_image}}" width="100%" alt="Blog Image">
+      </div>
+      <div class="col-sm-6">
+        <p>
+          {{blog.Blog_content|truncatechars:280|linebreaks}}
+          <a href="{% url 'Blog_app:blog_details' slug=blog.Slug %}" style="text-decoration:none ;" >Read more...</a>
+        </p>
+
+        <h6>@{{blog.Author}}</h6>
+        <hr>
+      </div>
+    </div>
+    {% endfor %}
+    <br>
+    <h4>Recent Post Blog</h4>
+    <br>
+    <div class="row d-flex justify-content-center">
+      {% for blog in blog_recent %}
+      <div class="col-md-4">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="/media/{{blog.Blog_image}}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{blog.Blog_title|truncatechars:20}}</h5>
+            <p class="card-text">{{blog.Blog_content|truncatechars:100}}..</p>
+            <a href="{% url 'Blog_app:blog_details' slug=blog.Slug %}" class="btn btn-primary">Read More</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+
+{% endblock %}

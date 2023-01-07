@@ -1,0 +1,49 @@
+
+
+
+{% include "file.html" %}
+
+
+{% if messages %}
+    {% for messeg in messages %}
+        {% if messeg.tags == 'error' %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{messeg}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
+  
+    {% endfor %}
+
+{% endif %}
+
+{% if messages %}
+    {% for messeg in messages %}
+        {% if messeg.tags == 'success' %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{messeg}}
+                
+            </div>
+        {% endif %}
+  
+    {% endfor %}
+
+{% endif %}
+
+{% if messages %}
+    {% for messeg in messages %}
+        {% if messeg.tags == 'warning' %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{messeg}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
+  
+    {% endfor %}
+
+{% endif %}
+

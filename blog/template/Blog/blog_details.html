@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block body_block %}
+  
+<div class="row">
+    <div class="col-sm-6">
+        <h2>{{blog_data.Blog_title}}</h2>
+        <h4>Posted By: @{{blog_data.Author}}</h4>
+        <i><h6>Published on: {{blog_data.publish_date}}</h6></i>
+        <i><h6>Update on: {{blog_data.Update_date}}</h6></i>
+        <h6>{{blog_data.Blog_comment.count}} Comment</h6>
+    </div>
+    <div class="col-sm-4">
+        <img src="/media/{{blog_data.Blog_image}}" width="100%" alt="">
+    </div>
+    
+    <p>
+        {{blog_data.Blog_content}}
+    </p>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <hr>
+        <h6>Comment:</h6>
+        {% for comment in blog_data.Blog_comment.all %}
+          <p> <a href="#">@{{comment.user}}</a> {{comment.comment}} <br><h6>{{comment.Comment_date}}</h6> </p>
+        {% endfor %}
+    </div>
+    <div class="col-sm-6">
+        <form method="POST" >
+           {% csrf_token %}
+            {{comment_form}}<br>
+            <button type="submit" class="btn btn-success btn-sm">Comment</button>
+        </form>
+        <br>
+        <br>
+        <br>
+    </div>
+</div>
+
+{% endblock %}
